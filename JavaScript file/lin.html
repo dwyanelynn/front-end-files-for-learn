@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="lin0"></div>
+    <div class="lin"></div>
+    <div class="lin1"></div>
+    <script>
+        // 测试await的结果是否是按顺序
+        let slow = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('3s到啦！')
+            }, 3000)
+        })
+        let quick = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('1s到啦！')
+            }, 1000)
+        })
+        let lin0 = document.querySelector('.lin0')
+        let lin = document.querySelector('.lin')
+        let lin1 = document.querySelector('.lin1')
+        async function compare() {
+            
+            lin0.innerHTML = 'compare函数开始执行了'
+            let p1 = await slow
+            lin.innerHTML = p1
+            lin0.innerHTML = 'slow已经获取了'
+            let p2 = await quick
+            lin.innerHTML = p1 + p2
+            lin1.innerHTML = 'compare函数执行完了'
+        }
+        compare()
+    </script>
+</body>
+</html>

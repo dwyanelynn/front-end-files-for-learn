@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const p = new Promise(function(resolve, reject) {
+            const xhr = new XMLHttpRequest()
+            xhr.open('get', 'https://api.apiopen.top/getJoke')
+            xhr.send()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(xhr.response)
+                    }else {
+                        reject(xhr.status)
+                    }
+                }
+            }
+        })
+        // 根据上面的promise对象的状态来执行相应的回调（处理数据↓）
+        p.then(function(value) {
+            console.log(value)
+        }, function(reason) {
+            console.error(reason)
+        })
+
+        
+    </script>
+</body>
+</html>

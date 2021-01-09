@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+            var ua = navigator.userAgent;
+            if (/msie/i.test(ua)){
+                alert("IE浏览器" );
+            }else if (/chrome/i.test(ua)) {
+                alert("Chrome");
+            }else if ("ActiveXObject" in window) {
+                alert("IE11");
+            }else if (/firefox/i.test(ua)) {
+                alert("火狐");
+            }
+    </script>
+</body>
+</html>

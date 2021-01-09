@@ -1,0 +1,52 @@
+<!-- 前端页面 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX post</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #90b;
+        }
+    </style>
+</head>
+<body>
+    <div>当鼠标移动到方框内，向服务端发送请求。并在方框内显示服务端返回的响应体内容结果：</div>
+    <div id="result"></div>
+    <script>
+        // 获取button元素
+        const result = document.getElementById('result')
+        // 绑定事件
+        result.onmouseover = function() {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest()
+            // 2.初始化：设置请求方法和url
+            xhr.open('POST', 'http://127.0.0.1:8000/server')
+            // 设置请求头
+            /* 第一个参数：头的名字； 第二个参数：头的值 */
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            /* 
+                Content-Type：用来设置请求体内容的类型
+                再后面一个参数这一长串，是指参数查询字符串的类型，是固定写法。
+            */
+            // 3.发送
+            xhr.send('a=100&b=200&c=300')
+            // 4.事件绑定  处理服务端返回的结果
+            xhr.onreadystatechange = function() {
+                // 判断（服务端是否返回了所有结果）
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // 处理结果（结果包括：行 头 空行 体） （空行我们就不获取了）
+                        // 设置result的文本
+                        result.innerHTML = xhr.response                        
+                    }else {
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

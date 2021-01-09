@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 用过渡制作 */
+/*         div {
+            margin: 0 auto;
+            margin-top: 50px;
+            width: 132px;
+            height: 271px;
+            background: url(./bigtap-mitu-queue-big.png) no-repeat;
+            background-position: 0 0;
+            transition: steps(3) 0.5s;
+        }
+        div:hover {
+            background-position: -396px 0;
+        } */
+
+        /* 用动画制作 */
+        div {
+            margin: 0 auto;
+            margin-top: 50px;
+            width: 132px;
+            height: 271px;
+            background: url(./bigtap-mitu-queue-big.png) ;
+            animation-name: mitu;
+            animation-duration: .5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: steps(3);
+
+        }
+        @keyframes mitu {
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: -396px 0;/* 这里不是整张图片宽度的负值 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

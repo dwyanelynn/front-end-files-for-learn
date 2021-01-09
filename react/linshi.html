@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 300px;
+            height: 400px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .mask {
+            width: 300px;
+            height: 400px;
+            background-color: rgba(0, 0, 0, 1);
+            opacity: 0.3;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .content {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+        .hide {
+            float: left;
+            overflow: hidden;
+            /* width: 80px; */
+            width: 100px;
+            padding-right: -40px;
+            background-color: aqua;
+        }
+        .scroll {
+            float: left;
+            overflow: auto;
+            width: 100px;
+            height: 100px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <!-- <img src="./964c90a5gy1gjlem3f285j20u0140jwt.jpg" alt="">
+    <div class="mask"></div>
+    <div class="content">
+        <h2>这是一只猫</h2>
+        <h3>nihao</h3>
+        <h4>nihao</h4>
+    </div> -->
+
+    <div class="hide">
+        <div class="scroll">
+            <li>nihao1</li>
+            <li>nihao2</li>
+            <li>nihao</li>
+            <li>nihao5</li>
+            <li>nihao4</li>
+            <li>nihao1</li>
+            <li>nihao2</li>
+            <li>nihao3</li>
+        </div>
+    </div>
+</body>
+</html>

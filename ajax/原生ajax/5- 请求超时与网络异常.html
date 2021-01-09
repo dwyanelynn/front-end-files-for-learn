@@ -1,0 +1,46 @@
+<!-- 前端页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 请求超时与网络异常</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #90b;
+        }
+    </style>
+</head>
+<body>
+    <div>当鼠标移入内，向服务端发送请求。</div>
+    <div id="result"></div>
+    <script>
+        const result = document.getElementById('result')
+        result.onmouseover = function() {
+            const xhr = new XMLHttpRequest()
+            // 超时设置
+            xhr.timeout = 2000 /* 若返回响应超过2s就取消该请求 */
+            // 超时回调
+            xhr.ontimeout = () => {
+                alert('网络异常，请稍后重试')
+            }
+            // 网络异常回调
+            xhr.onerror = () => {
+                alert('你的网络似乎出现了问题！')
+            }
+            xhr.open('GET', 'http://127.0.0.1:8000/timeout-server')
+            xhr.send()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response
+                    }else {
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

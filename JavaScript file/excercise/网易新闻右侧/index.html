@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css">
+    <style>
+        body {
+            background-color: rgb(236, 218, 218);
+        }
+        .main {
+            width: 300px;
+            height: 358px;
+            background-color: #fff;
+            margin: 10px auto;
+            border-top: #dddddd 1px solid;
+            border-bottom: #dddddd 1px solid;
+            padding: 0px 0px 0px 0px;
+        }
+        .clearfix:before,
+        .clearfix:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .clearfix{
+            zoom:1;
+        }
+        h1 {
+            border-top:1px rgba(255, 0, 0, 0.767) solid;
+            display: inline-block;
+            margin-top: -1px;
+        }
+        h1 a {
+            text-decoration: none;
+            color: #404040;
+            font: bold 16px "微软雅黑";
+            line-height: 40px;
+        }
+        li {
+            margin-bottom: 15px;
+        }
+        li::before {
+            content: "■";
+            color:#dddddd;
+            font-size: 8px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        img {
+            vertical-align: bottom;
+        }
+        li a {
+            font:  14px "微软雅黑";
+            color: #666666;
+            text-decoration: none;
+            line-height: 13px;
+        }
+        li a:hover {
+            color:brown;
+        }
+        h1 a:hover {
+            color:#a8a2a2;
+        }
+        p {
+            margin-top: -28px;
+            font: bold 16px "微软雅黑";
+            color: white;
+            margin-left: 38px;
+        }
+        .pic {
+            height: 150px;
+            margin-bottom: 21px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clearfix main">
+        <h1><a href="#">体育</a></h1>
+        <div class="pic">        
+            <a href="#"><img src="./img/1.jpeg" alt=""><p>费德勒首负迪米 扶额摇头不满发挥</p></a>
+            
+        </div>
+
+        <ul>
+            <li><a href="#">乔治:我爱LA喜欢和LBJ—起打球</a></li>
+            <li><a href="#">格林:3年前降薪就在等KD 特制T恤嘲讽LBJ</a></li>
+            <li><a href="#">塔克4000双鞋让保罗羡慕嫉妒 乔丹被震惊</a></li>
+            <li><a href="#">CBA下季新赛制:常规赛4组循环 增至46轮</a></li>
+        </ul>
+
+    </div>
+</body>
+</html>

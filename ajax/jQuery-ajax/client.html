@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在jQuery中发送ajax请求</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">jQuery发送ajax</h2>
+        <button>GET</button>
+        <button>POST</button>
+        <button>通用型方法ajax</button>
+    </div>
+    <script src="./jQuery库/jQuery/jquery-v1.12.4.js"></script>
+    <script>
+        $('button').eq(0).click(function() {
+            $.get('http://127.0.0.1:8000/jQuery-server', {a:100, b:200}, function(data) {
+                console.log(data)
+            })
+        })
+        $('button').eq(1).click(function() {
+            $.post('http://127.0.0.1:8000/jQuery-server', {a:100, b:200}, function(data) {
+                console.log(data)
+            })
+        })
+        $('button').eq(2).click(function() {
+            $.ajax({
+                // url
+                url: 'http://127.0.0.1:8000/jQuery-server',
+                // 参数
+                data: {a:100, b:200},
+                // 设置响应体结果类型
+                dataType: 'json',
+                // 成功时的回调
+                success: function(data) {
+                    console.log(data)
+                },
+                // 超时时间
+                timeout: 2000,
+                // 失败时的回调（失败包括：超时、网络异常）
+                error: function() {
+                    console.log("出错啦！")
+                },
+                // 设置请求头信息
+                headers: {
+                    c: 300,
+                    d: 400
+                }
+            })
+        })
+    </script>
+</body>
+</html>

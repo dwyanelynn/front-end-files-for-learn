@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实例化promise对象
+        /* 
+            在实例化时，接受一个函数作为参数。
+            该函数有两个形参，resolve和reject。（当然，写的时候可以以其它字母代替，反正顺序固定）
+        */
+
+        const p = new Promise(function(resolve, reject) {
+            // 在这里封装一个异步操作
+            /* 在异步操作里面，我们可以读到一些数据，无论是文件读取、数据库读取还是请求接口读取 */
+            setTimeout(() => {
+                // 
+                let data = '数据库中的用户数据'
+                /* 在得到数据以后，我们可以去调用resolve()和reject()这两个函数来改变promise实例对象的状态 */
+                resolve(data)/* 调用完resolve()后，该promise对象的状态就会变为“成功” */
+
+                // let err = '数据读取失败'
+                // reject(err)  /* reject()后，该promise对象的状态就会变为“失败” */
+            }, 1000);
+        })
+        // 状态为“成功”后，就可以调用promise对象的 then 方法
+        /* then方法接收两个参数，两个参数都是函数。第一个函数是状态成功之后要调用的，第二个函数则是失败后.. */
+        p.then(function(value){
+            console.log(value)
+        }, function(reason) {
+            console.error(reason)
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!-- 前端页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 重复请求问题</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #90b;
+        }
+    </style>
+</head>
+<body>
+    <div>当鼠标移入内，向服务端发送请求。</div>
+    <div id="result"></div>
+    <script>
+        const result = document.getElementById('result')
+        let xhr = null
+        // 标识变量
+        let isSending = false /* 是否正在发送ajax请求 */
+
+        result.onmouseover = function() {
+            // 判断标识变量
+            if (isSending) {
+                xhr.abort()
+            }
+            xhr = new XMLHttpRequest()
+            // 修改标示变量的值
+            isSending = true
+            xhr.open('GET', 'http://127.0.0.1:8000/repeat-server')
+            xhr.send()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    /* 注意这里不判断是否成功接收到响应结果 */
+                        // if (xhr.status >= 200 && xhr.status < 300) {
+                        //     result.innerHTML = xhr.response
+                        // }else {
+                        // }
+                    // 修改标识变量
+                    isSending = false
+                }
+            }
+        }
+    </script>
+</body>
+</html>

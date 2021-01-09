@@ -1,0 +1,43 @@
+<!-- 前端页面 -->
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 手动取消请求</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #90b;
+        }
+    </style>
+</head>
+<body>
+    <div>当鼠标移入内，向服务端发送请求。</div>
+    <div id="result"></div>
+    <br>
+    <button type="button" id="cancel">取消正在发送请求</button>
+    <script>
+        const result = document.getElementById('result')
+        const cancelBtn = document.getElementById('cancel')
+        let xhr = null
+        cancelBtn.onclick = function() {
+            xhr.abort()
+        }
+        result.onmouseover = function() {
+            xhr = new XMLHttpRequest()
+            xhr.open('GET', 'http://127.0.0.1:8000/cancel-server')
+            xhr.send()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response
+                    }else {
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

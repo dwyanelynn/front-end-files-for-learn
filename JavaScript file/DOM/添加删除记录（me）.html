@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加删除记录练习</title>
+<link rel="stylesheet" type="text/css" href="ex_2_style/css.css" />
+<script type="text/javascript">
+	/* Delete键的单击响应函数 */
+	function delA() {
+		let tr = this.parentNode.parentNode;
+		/* 设置询问是否删除的对话框 */
+		let flag = confirm(`确认删除${tr.firstElementChild.innerHTML}吗？`);/* 或者用下面这些 */
+		// let flag = confirm(`确认删除${tr.children[0].innerHTML}吗？`);
+		// let flag = confirm(`确认删除${tr.getElementsByTagName("td")[0].innerHTML}吗？`);
+		if (flag) {
+			tr.parentNode.removeChild(tr);
+		}
+		return false;
+	}
+	window.onload = function() {
+		let allA = document.getElementsByTagName("a");
+		/* 为每个超链接绑定一个单击响应函数 */
+		for (let i=0; i<allA.length; ++i) {
+			allA[i].onclick = delA;/* 注意是delA而不是delA() */
+		}
+		/* 添加员工 */
+		let addEmpButton = document.getElementById('addEmpButton');
+		addEmpButton.onclick = function() {
+			let empName = document.getElementById('empName').value;
+			let email = document.getElementById('email').value;
+			let salary = document.getElementById('salary').value;
+			let main = document.getElementById('employeeTable');
+			/* ---------方法1-------- */
+			let newtr = document.createElement('tr');
+			let newtd1 = document.createElement('td');
+			let newtd2 = document.createElement('td');
+			let newtd3 = document.createElement('td');
+			let newtd4 = document.createElement('td');
+			let newa = document.createElement('a');
+			let nameText = document.createTextNode(empName);
+			let emailText = document.createTextNode(email);
+			let salaryText = document.createTextNode(salary);
+			let delText = document.createTextNode('Delete');
+			newtd1.appendChild(nameText);
+			newtd2.appendChild(emailText);
+			newtd3.appendChild(salaryText);
+			newa.href = `javascript:;`;
+			newa.appendChild(delText);
+			newtd4.appendChild(newa);
+			newtr.appendChild(newtd1); 
+			newtr.appendChild(newtd2); 
+			newtr.appendChild(newtd3); 
+			newtr.appendChild(newtd4); 
+			main.children[0].appendChild(newtr);/* 加children[0]是因为有tbody */
+			// 为新添加的员工绑定新的单击响应函数（如果不绑，则新添加的员工删除不了）
+			newa.onclick = delA;
+			/* ---------方法2-------- */
+			// let newtr = document.createElement('tr');
+			// newtr.innerHTML = 	`<td>${empName}</td>
+			// 					<td>${email}</td>
+			// 					<td>${salary}</td>
+			// 					<td><a href="javascript:;">Delete</a></td>`;
+			// let a = newtr.getElementsByTagName('a')[0];
+			// main.children[0].appendChild(newtr);
+			// a.onclick = delA;
+			
+		}
+			
+	}
+</script>
+</head>
+<body>
+
+	<table id="employeeTable">
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Salary</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr>
+			<td>Tom</td>
+			<td>tom@tom.com</td>
+			<td>5000</td>
+			<td><a href="javascript:;">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Jerry</td>
+			<td>jerry@sohu.com</td>
+			<td>8000</td>
+			<td><a href="deleteEmp?id=002">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Bob</td>
+			<td>bob@tom.com</td>
+			<td>10000</td>
+			<td><a href="deleteEmp?id=003">Delete</a></td>
+		</tr>
+	</table>
+
+	<div id="formDiv">
+	
+		<h4>添加新员工</h4>
+
+		<table>
+			<tr>
+				<td class="word">name: </td>
+				<td class="inp">
+					<input type="text" name="empName" id="empName" />
+				</td>
+			</tr>
+			<tr>
+				<td class="word">email: </td>
+				<td class="inp">
+					<input type="text" name="email" id="email" />
+				</td>
+			</tr>
+			<tr>
+				<td class="word">salary: </td>
+				<td class="inp">
+					<input type="text" name="salary" id="salary" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button id="addEmpButton" value="abc">
+						Submit
+					</button>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+
+</body>
+</html>

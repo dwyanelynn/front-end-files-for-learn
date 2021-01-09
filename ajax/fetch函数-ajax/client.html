@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用fetch函数发送ajax请求</title>
+</head>
+<body>
+    <button id="btn">ajax请求</button>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.onclick = function() {
+            fetch('http://127.0.0.1:8000/fetch-server?vip=10', {
+                /* 上面这里也可以在URL尾部配置url参数 */
+                // 请求方法
+                method: 'POST',
+                // 请求头
+                headers: {
+                    name: 'atguigu'
+                },
+                // 请求体
+                body: 'username=admin&password=admin'
+                /* ↓↓ fetch()的返回结果是一个Promise对象 ↓↓ */
+            }).then(response => {
+                console.log(response)   /* 这样不能得到响应体内容，还要返回 */
+                return response.text()  /* 因为这是Promise的语法 */
+                // return response.json()  /* 若响应体数据类型为json，可设置成这样以转换为js对象 */
+            }).then(response => {
+                console.log(response)
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        img {
+            vertical-align: middle;
+        }
+        #outer {
+            margin: 0 auto;
+            background-color: rgb(245, 212, 212);
+            width: 500px;
+            height: 333px;
+            overflow: hidden;
+            margin-top: 30px;
+            position: relative;
+        }
+        #imgList {
+            position: absolute;
+            list-style: none;
+            /* transition: left 0.3s ease-in; */
+        }
+        #imgList li {
+            float: left;
+        }
+        #navDiv {
+            position: absolute;
+            /* left: 50%;
+            transform: translateX(-50%); */
+            /* 这里还可以使用left的百分比来居中，但实际项目中还是根据浏览器兼容而选择，因为transform不确定IE是否兼容 */
+            /* 如果是用left的数值的话，可以用js计算出相应的数值，这样每次多加一个按钮也能自动居中 */
+            bottom: 20px;
+        }
+        #navDiv a {
+            float: left;
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+            box-sizing: border-box;
+            border-radius: 50%;/* 这个不支持IE8 */
+            border: 1.5px solid rgb(119, 116, 116);
+            background-color: rgb(192, 190, 190);/* rgba好像也不支持IE8 */
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+        #navDiv a:hover {
+            opacity: 0.9;
+            /* filter: alpha(opacity=0); */
+            background-color: #fff;
+        }
+        .linshi {
+            font: lighter 30px 'Source Sans Pro';
+            color: #304455;
+
+        }
+    </style>
+    <script type="text/javascript" src="../js全部工具函数合并.js"></script>
+    <script>
+        window.onload = function() {
+            // 使存放图片的imgList能够根据图片的数量而增加宽度
+            var imgList = document.getElementById("imgList");
+            var imgArr = document.getElementsByTagName('img');
+            imgList.style.width = 520 * imgArr.length + "px";
+
+            // 设置导航按钮居中↓
+            var navDiv = document.getElementById('navDiv');
+            var outer = document.getElementById('outer');
+            navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + 'px';
+
+            // 设置导航按钮默认显示的效果
+            var index = 0;/* 默认显示着的图片的索引 */
+            var allA = navDiv.getElementsByTagName('a');
+            allA[index].style.backgroundColor = '#fff';
+            allA[index].style.opacity = '0.9';
+
+            // 为所有的超链接都绑定单击响应函数
+            for (var i=0; i<allA.length; ++i) {
+                /* 因为单击响应函数里的allA已经查看不了它的索引，所以我们在这里添加一个属性来保存索引 */
+                allA[i].num = i;
+                allA[i].onclick = function() {
+                    /* 点击时先关闭自动切换的效果 */
+                    clearInterval(timer);
+                    /* 将num属性的值，赋给全局变量的index，来修正我当时显示图片的索引 */                    
+                    index = this.num;
+                    // imgList.style.left = index * -500 + 'px';
+                    boxMove(imgList, 'left', -500*index, 40, function(){
+                        autochange();/* 手动切换完后再恢复到自动切换 */
+                    });
+                    setA();
+                }
+            }
+
+            // 创建一个方法用来设置选中的a
+            function setA() {
+                // 当到达“最后一张”时，索引设置为0
+                if (index >= imgArr.length - 1) {
+                    index = 0;
+                    imgList.style.left = 0;/* 当到达所谓的最后一张时，瞬间切换到第一张 */
+                }
+                for (var i=0; i<allA.length; ++i) {
+                    /* 下面这两行是， 使点击完后恢复为原始样式（即消除之前在.style设置的内联样式） */
+                    allA[i].style.backgroundColor = '';
+                    allA[i].style.opacity = '';
+                }
+                allA[index].style.backgroundColor = 'white';
+                allA[index].style.opacity = '0.9';
+            }
+            // 创建一个自动切换的方法
+            var timer;
+            function autochange() {
+                timer = setInterval(function() {
+                    index++;
+                    index %= imgArr.length;
+                    boxMove(imgList, 'left', -500*index, 40, function(){
+                        setA();
+                    });
+                }, 3000)
+            }
+            autochange();
+        }
+    </script>
+</head>
+<body>
+    <!-- 创建一个外部的div，来作为大的容器 -->
+    <div id="outer">
+        <!-- 创建一个ul，用于放置图片 -->
+        <ul id="imgList">
+            <li><img src="./img/1.jpg"></li>
+            <li><img src="./img/2.jpg"></li>
+            <li><img src="./img/3.jpg"></li>
+            <li><img src="./img/4.jpg"></li>
+            <li><img src="./img/5.jpg"></li>
+            <li><img src="./img/1.jpg"></li>
+        </ul>
+        <!-- 创建轮播图的导航条 -->    
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="linshi">渐进式</div>
+    <br>
+    <div class="linshi">JavaScript框架</div>
+</body>
+</html>

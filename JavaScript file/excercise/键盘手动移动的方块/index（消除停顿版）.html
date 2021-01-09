@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #lin {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(238, 173, 173);
+        position: absolute;
+        transition: all 0.1s linear;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<script>
+    window.onload = function() {
+        let lin = document.getElementById("lin");
+        // 创建一个变量表示方向
+        var dir = 0;
+        // 开启一个定时器控制div的移动
+        document.onkeydown = function(event){
+            event = event || window.event;
+            dir = event.keyCode;/* 把keyCode赋给全局变量dir */
+        }
+        setInterval(function() {
+            let speed = 35;
+            switch (dir) {
+                case 37:
+                    lin.style.left = lin.offsetLeft - speed + "px";
+                    break;
+                case 38:
+                    lin.style.top = lin.offsetTop - speed + "px";
+                    break;
+                case 39:
+                    lin.style.left = lin.offsetLeft + speed + "px";
+                    break;
+                case 40:
+                    lin.style.top = lin.offsetTop + speed + "px";
+                    break;
+            }
+        }, 0)/* 小于100都有差不多的效果 */
+        // 阻止其连续移动
+        document.onkeyup = function() {
+            dir = 0;
+        }
+    }
+</script>
+<body>
+    <div id="lin"></div>
+    
+</body>
+</html>

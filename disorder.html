@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 这是一个实现数组深拷贝的函数。
+        function deepCopy(arr) {
+            let newArray = []
+            for (let index in arr ) {
+                if (arr.hasOwnProperty(index)) {
+                    if (arr[index] && typeof arr[index] === 'object') {
+                        newArray[index] =  deepCopy(arr[index])
+                    } else {
+                        newArray[index] = arr[index]
+                    }
+                }
+            }
+            return newArray
+        }
+        function disorder(str) {
+            let newAccount = deepCopy(str)
+            for (let j=0; j<newAccount.length; ++j) {
+                newAccount[j].pwd = ''
+                // console.log(myReg.test(str[j].pwd[0]))
+                for (let i=0; i<str[j].pwd.length; ++i) {
+                    let numReg = /[0-9]/
+                    let letterReg = /[A-z]/
+                    if (numReg.test(str[j].pwd[i])) {
+                        let key1 = str[j].pwd[i]
+                        switch (key1) {
+                            case '1':
+                                newAccount[j].pwd = `${newAccount[j].pwd}0`
+                                break
+                            case '2':
+                                newAccount[j].pwd = `${newAccount[j].pwd}9`
+                                break
+                            case '3':
+                                newAccount[j].pwd = `${newAccount[j].pwd}8`
+                                break
+                            case '4':
+                                newAccount[j].pwd = `${newAccount[j].pwd}7`
+                                break
+                            case '5':
+                                newAccount[j].pwd = `${newAccount[j].pwd}6`
+                                break
+                            case '6':
+                                newAccount[j].pwd = `${newAccount[j].pwd}5`
+                                break
+                            case '7':
+                                newAccount[j].pwd = `${newAccount[j].pwd}4`
+                                break
+                            case '8':
+                                newAccount[j].pwd = `${newAccount[j].pwd}3`
+                                break
+                            case '9':
+                                newAccount[j].pwd = `${newAccount[j].pwd}2`
+                                break
+                            case '0':
+                                newAccount[j].pwd = `${newAccount[j].pwd}1`
+                                break
+                            default:
+                                break;
+                        }
+                    } else {
+                        let key2 = str[j].pwd[i]
+                        switch (key2) {
+                            case 'q':
+                                newAccount[j].pwd = `${newAccount[j].pwd}p`
+                                break
+                            case 'w':
+                                newAccount[j].pwd = `${newAccount[j].pwd}o`
+                                break
+                            case 'e':
+                                newAccount[j].pwd = `${newAccount[j].pwd}i`
+                                break
+                            case 'r':
+                                newAccount[j].pwd = `${newAccount[j].pwd}u`
+                                break
+                            case 't':
+                                newAccount[j].pwd = `${newAccount[j].pwd}y`
+                                break
+                            case 'y':
+                                newAccount[j].pwd = `${newAccount[j].pwd}t`
+                                break
+                            case 'u':
+                                newAccount[j].pwd = `${newAccount[j].pwd}r`
+                                break
+                            case 'i':
+                                newAccount[j].pwd = `${newAccount[j].pwd}e`
+                                break
+                            case 'o':
+                                newAccount[j].pwd = `${newAccount[j].pwd}w`
+                                break
+                            case 'p':
+                                newAccount[j].pwd = `${newAccount[j].pwd}q`
+                                break
+                            case 'a':
+                                newAccount[j].pwd = `${newAccount[j].pwd}z`
+                                break
+                            case 's':
+                                newAccount[j].pwd = `${newAccount[j].pwd}x`
+                                break
+                            case 'd':
+                                newAccount[j].pwd = `${newAccount[j].pwd}c`
+                                break
+                            case 'f':
+                                newAccount[j].pwd = `${newAccount[j].pwd}v`
+                                break
+                            case 'g':
+                                newAccount[j].pwd = `${newAccount[j].pwd}b`
+                                break
+                            case 'h':
+                                newAccount[j].pwd = `${newAccount[j].pwd}n`
+                                break
+                            case 'j':
+                                newAccount[j].pwd = `${newAccount[j].pwd}m`
+                                break
+                            case 'k':
+                                newAccount[j].pwd = `${newAccount[j].pwd}l`
+                                break
+                            case 'l':
+                                newAccount[j].pwd = `${newAccount[j].pwd}k`
+                                break
+                            case 'z':
+                                newAccount[j].pwd = `${newAccount[j].pwd}a`
+                                break
+                            case 'x':
+                                newAccount[j].pwd = `${newAccount[j].pwd}s`
+                                break
+                            case 'c':
+                                newAccount[j].pwd = `${newAccount[j].pwd}d`
+                                break
+                            case 'v':
+                                newAccount[j].pwd = `${newAccount[j].pwd}f`
+                                break
+                            case 'b':
+                                newAccount[j].pwd = `${newAccount[j].pwd}g`
+                                break
+                            case 'n':
+                                newAccount[j].pwd = `${newAccount[j].pwd}h`
+                                break
+                            case 'm':
+                                newAccount[j].pwd = `${newAccount[j].pwd}j`
+                                break
+                            case 'Q':
+                                newAccount[j].pwd = `${newAccount[j].pwd}P`
+                                break
+                            case 'W':
+                                newAccount[j].pwd = `${newAccount[j].pwd}O`
+                                break
+                            case 'E':
+                                newAccount[j].pwd = `${newAccount[j].pwd}I`
+                                break
+                            case 'R':
+                                newAccount[j].pwd = `${newAccount[j].pwd}U`
+                                break
+                            case 'T':
+                                newAccount[j].pwd = `${newAccount[j].pwd}Y`
+                                break
+                            case 'Y':
+                                newAccount[j].pwd = `${newAccount[j].pwd}T`
+                                break
+                            case 'U':
+                                newAccount[j].pwd = `${newAccount[j].pwd}R`
+                                break
+                            case 'I':
+                                newAccount[j].pwd = `${newAccount[j].pwd}E`
+                                break
+                            case 'O':
+                                newAccount[j].pwd = `${newAccount[j].pwd}W`
+                                break
+                            case 'P':
+                                newAccount[j].pwd = `${newAccount[j].pwd}Q`
+                                break
+                            case 'A':
+                                newAccount[j].pwd = `${newAccount[j].pwd}Z`
+                                break
+                            case 'S':
+                                newAccount[j].pwd = `${newAccount[j].pwd}X`
+                                break
+                            case 'D':
+                                newAccount[j].pwd = `${newAccount[j].pwd}C`
+                                break
+                            case 'F':
+                                newAccount[j].pwd = `${newAccount[j].pwd}V`
+                                break
+                            case 'G':
+                                newAccount[j].pwd = `${newAccount[j].pwd}B`
+                                break
+                            case 'H':
+                                newAccount[j].pwd = `${newAccount[j].pwd}N`
+                                break
+                            case 'J':
+                                newAccount[j].pwd = `${newAccount[j].pwd}M`
+                                break
+                            case 'K':
+                                newAccount[j].pwd = `${newAccount[j].pwd}L`
+                                break
+                            case 'L':
+                                newAccount[j].pwd = `${newAccount[j].pwd}K`
+                                break
+                            case 'Z':
+                                newAccount[j].pwd = `${newAccount[j].pwd}A`
+                                break
+                            case 'X':
+                                newAccount[j].pwd = `${newAccount[j].pwd}S`
+                                break
+                            case 'C':
+                                newAccount[j].pwd = `${newAccount[j].pwd}D`
+                                break
+                            case 'V':
+                                newAccount[j].pwd = `${newAccount[j].pwd}F`
+                                break
+                            case 'B':
+                                newAccount[j].pwd = `${newAccount[j].pwd}G`
+                                break
+                            case 'N':
+                                newAccount[j].pwd = `${newAccount[j].pwd}H`
+                                break
+                            case 'M':
+                                newAccount[j].pwd = `${newAccount[j].pwd}J`
+                                break
+                            default:
+                                newAccount[j].pwd = `${newAccount[j].pwd}${key2}`
+                                break;
+                        }
+                    }
+                }
+            }
+            return newAccount
+        }
+        console.log(disorder(finance))
+    </script>
+</body>
+</html>

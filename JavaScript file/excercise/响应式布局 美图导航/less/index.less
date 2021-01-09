@@ -1,0 +1,186 @@
+/* 等价于之前的and */
+
+// html {
+    //     font-size: 100vw/750 * 40;
+    // }
+a {
+    text-decoration: none;
+}
+.top-bar {
+    height: 64px;
+    // width: auto;
+    max-width: 1280px;/* 防止宽度越来越大，导致top-bar的两边的元素也在浏览器窗口的两边，但实际上宽屏幕中浏览器窗口的两边应该没有什么按钮、图标等东西的 */
+    position: relative;
+    z-index: 9999;
+    // 宽度不给了，因为是全屏宽
+    background-color: transparent;
+    box-sizing: border-box;/* 不加这个的话，padding就会增加了宽度top-bar的宽度了 */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    .left-menu {
+        
+        &:hover {
+            .nav {
+                width: 100%;
+            }
+            .menu-icon {
+                li {
+                    background-color: rgba(155, 151, 151, 0.521);
+                }
+            }
+        }
+        .menu-icon {
+            margin-left: 20px;
+            height: 16px;
+            width: 16px;
+            box-sizing: border-box;
+            position: absolute;
+            z-index: 9999;
+            li {
+                width: 16px;
+                height: 2px;
+                background-color: rgba(255, 255, 255, 0.664);
+                transition: all 0.3s;
+            }
+            li:nth-child(2) {
+                margin: 4px 0;
+            }
+            /* 下面是鼠标移入后的效果，正常是点击后才发生变化，要依靠JavaScript来实现 */
+            &:hover { 
+                li:nth-child(2) {
+                    opacity: 0;
+                }
+                li:nth-child(1) {
+                    transform:/* translateY(6px) */ rotateZ(48deg);
+                    transform-origin: left center;/* 也可以先平移再旋转来代替这个origin */
+                }
+                li:nth-child(3) {
+                    transform: /* translateY(-6px) */ rotateZ(-48deg);
+                    transform-origin: left center;
+                }
+            }
+        }
+        .nav {
+            position: absolute;
+            z-index: 2;
+            top: 0px;
+            width: 0%;
+            overflow: hidden;
+            left: 0;
+            background-color: #fff;
+            transition: width 2s;/* 设置这个过渡的时候，从大屏幕切换到小屏幕，会有该效果的残留 */
+            li {
+                height: 64px;
+                line-height: 64px;
+                text-align: center;
+            }
+            a {
+                font-size: 20px;
+                color: #505050;
+            }
+            img {
+                background-size: contain;
+                width: 73px;
+                height: 20px;
+                margin: 0 auto;
+            }
+        }
+    }
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        // margin: 0 auto;
+        a {
+            background: url(../img/logo1.png) no-repeat;
+            display: block;
+            background-size: contain;
+            width: 73px;
+            height: 20px;
+        }
+    }
+}
+.banner {
+    background: url(../img/banner.jpg) no-repeat;
+    background-size: cover;
+    background-position: 50% center;/* 这行是看官网设置的 */
+    position: absolute;
+    width: 100vw;
+    height: 540px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+@media only screen {
+    // @media (max-width: 1050px) {
+    //     .left-menu {
+        
+    //         &:hover {
+    //             .nav {
+    //                 width: 100%;
+    //             }
+    //         }
+    //     }
+    // }
+    @media (min-width: 1050px) {
+        .top-bar {
+            .logo {
+                left: 20px;
+                transform: none;
+                a {
+                    width: 107px;
+                    height: 30px;
+                }
+            }
+            .left-menu {
+                &:hover {
+                    .nav {
+                        transition: none;
+                    }
+                }
+                margin: 0 auto;
+                .menu-icon {
+                    display: none;
+                }
+                .nav {
+                    position: static;
+                    z-index: 2;
+                    margin: 0 auto;
+                    width: 100%;
+                    display: flex;
+                    background-color: transparent;
+                    transition: none;
+                    overflow: unset;
+                    & > li:nth-of-type(1) {
+                        display: none;
+                    }
+                    & > li:nth-of-type(2) {
+                        position: absolute;
+                        right: 2vw;
+                    }
+                    div {
+                        display: flex;
+                        flex: row nowrap;
+                        width: 50vw;
+                        justify-content: space-between;
+                    }
+                    a,span {
+                        opacity: 0.95;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 16px;
+                    }
+                    span {
+                        color: rgba(253, 253, 252, 0.507);
+                    }
+                }
+            }
+        }
+    }
+}

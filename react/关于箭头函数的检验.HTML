@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var name = 'hao'
+        let a = {
+            name: 'huahua',
+            bb: function() {
+                console.log('这是对象内普通函数的name：',this)
+                console.log('这是对象内普通函数的name：',name)
+                console.log('这是对象内普通函数的this.name：',this.name)
+            },
+            cc: () => {
+                console.log('这是对象内箭头函数的this：', this)
+                console.log('这是对象内箭头函数的name：', name)
+                console.log('这是对象内箭头函数的this.name：', this.name)
+            }
+        }
+        function fn1() {
+            console.log('这是普通函数内的this:',this)
+            console.log('这是普通函数内的name:',name)
+            console.log('这是普通函数内的this.name:',this.name)
+        }
+        let name = 'et'
+        window.name = 'lin'
+        let a = {
+            name: 'huahua',
+            bb: function() {
+                console.log('这是对象内普通函数的name：',this)// a对象.(在debugger也显示为a对象)
+                console.log('这是对象内普通函数的name：',name)//et
+                console.log('这是对象内普通函数的this.name：',this.name)//huahua
+            },
+            cc: () => {
+                console.log('这是对象内箭头函数的this：', this)//window。 （但在debugger是显示undefiend）
+                console.log('这是对象内箭头函数的name：', name)//et
+                console.log('这是对象内箭头函数的this.name：', this.name)//lin （没有window.name='lin'，则是空串）
+            }
+        }
+        function fn1() {
+            console.log('这是普通函数内的this:',this)//window   （在debugger也显示window）
+            console.log('这是普通函数内的name:',name)//et
+            console.log('这是普通函数内的this.name:',this.name)//lin （没有window.name='lin'，则是空串）
+        }
+        a.bb()
+        a.cc()
+        fn1()
+    </script>
+</body>
+</html>

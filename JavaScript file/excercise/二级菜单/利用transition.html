@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css">
+    <script src="../js全部工具函数合并.js"></script>
+    <style>
+        .menu {
+            width: 100px;
+
+        }
+        .item {
+            overflow: hidden;
+            width: 100px;
+            
+        }
+        .smenu {
+            background-color: #bfa;
+            transition: all 0.5s;
+            overflow: hidden;
+            height: 0px;
+        }  
+        .smenu a {
+            text-decoration: none;
+            font-size: 15px;
+            display: block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px solid rgba(20, 93, 175, 0.473);
+            text-align: center;
+        }
+        span {
+            cursor: pointer;
+            display: block;
+            text-align: center;
+            width: 100px;
+            height: 20px;
+            background-color: #eee;
+            overflow: hidden;
+            text-decoration: none;
+            color: rgb(130, 37, 0);
+        }
+        .collapse {
+            height: 63px;
+        }
+        /* #pic:target .smenu{
+            max-height: 93px;
+        } */
+    </style>
+    <script>
+        window.onload = function() {
+            var spanbtn = document.getElementsByTagName('span');
+            var menu = document.getElementById('menu');
+            for (let i=0; i<spanbtn.length; ++i) {
+                // var index = i;
+                spanbtn[i].onclick = function() {
+                    var openItem = spanbtn[i].parentNode;
+                    let smenu = document.querySelectorAll('.smenu')[i];
+                    // alert(i);
+                    change(smenu);
+                    var parentItem = this.parentNode;
+                }
+            }
+            function change(obj) {
+                if (getStyle(obj, 'height') == '0px') {
+                        obj.style.height = '93px';
+                    }else {
+                        obj.style.height = '0px';
+                    }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="menu">
+        <div class="item">
+            <span href="#">菜单栏</span>
+            <div class="smenu">
+                <a href="#">JavaScript</a>
+                <a href="#">Sugarcane</a>
+                <a href="#">Information</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <span href="#">服务栏</span>
+            <div class="smenu">
+                <a href="#">JavaScript</a>
+                <a href="#">Sugarcane</a>
+                <a href="#">Information</a>
+            </div>
+        </div>
+        <div class="item">
+            <span href="#">售后栏</span>
+            <div class="smenu">
+                <a href="#">JavaScript</a>
+                <a href="#">Sugarcane</a>
+                <a href="#">Information</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

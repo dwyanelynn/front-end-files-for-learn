@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        body {
+            height: 3000px;
+            margin: 100px;
+            background-color: rgb(233, 166, 166);
+        }
+        html {
+            margin: 100px;
+            background-color: #fff;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let box1 = document.getElementById('box1');
+            
+            /* document.onmousemove = function(event) { */
+                /* let gen = document.documentElement; 
+                    gen.onmousemove = function(event) { */   
+            window.onmousemove = function(event) {      /* 以上有两种方式可代替此行的window */
+                event = event || window.event;
+                
+                /* 兼容IE8 */  
+               
+                let x = event.clientX;/* IE8没有pageX */
+                let y = event.clientY;
+                let a = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset;  /* 这里是兼容浏览器问题 */
+                let b = document.documentElement.scrollLeft || document.body.scrollLeft || window.pageXOffset;
+                box1.style.top = `${y+a}px`;
+                box1.style.left = `${x+b}px`;
+               
+                /* 主流浏览器 */
+                /*  let x = event.pageX;
+                let y = event.pageY;
+                box1.style.top = `${y}px`;
+                box1.style.left = `${x}px`; */
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box1">
+    </div>
+</body>
+</html>

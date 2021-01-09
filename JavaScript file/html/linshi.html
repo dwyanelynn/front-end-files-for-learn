@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        .header {
+            border: 3px solid greenyellow;
+            overflow:auto;
+        }
+
+        .test {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(4, 28, 107);
+        }
+        .test2 {
+            background-color: hotpink;
+            width: auto;
+            padding-top: 10px;
+            padding-left: 20px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .test3 {
+            background-color: rgb(105, 115, 255);
+            width: 200px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .box3 {
+            background-color: blanchedalmond;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+        }
+        table {
+            width: 200px;
+            border: 1px solid #727070;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid black;
+
+        }
+        .cc {
+            background-color: rgba(157, 230, 178, 0.712);
+            width: 20px;
+            height: 20px;
+            margin: 20px;
+            border-radius: 50%;
+            border: 2px rgb(166, 202, 236) solid;
+            transition: all 0.5s;
+        }
+        .cc:hover {
+            background-color: rgba(65, 235, 113, 0.712);;
+            border: 2px rgb(76, 156, 231) solid;
+
+        }
+        #lin {
+            background-color: red;
+            width: 40px;
+            height: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="test"></div>
+    </div>
+    <div class="test2">22</div>
+
+    <div class="test3">
+        <div class="box3"></div>
+        <div class="box3"></div>
+    </div>
+
+    <!-- 轮播图右下角的点 -->
+    <div class="cc"></div>
+    <div id="lin"></div>
+
+    <table>
+        <tr>
+            <td>A1</td>
+            <td>A1</td>
+            <td>A1</td>
+        </tr>
+        <tr>
+            <td>A1</td>
+            <td>A1</td>
+            <td>A1</td>
+            <td>A1</td>
+        </tr>
+    </table>
+    <script>
+        let lin = document.getElementById('lin')
+        lin.addEventListener('click', function() {
+            let _this = this
+            setTimeout(function() {
+                _this.style.background = 'pink'
+            })
+        })
+    </script>
+</body>
+</html>

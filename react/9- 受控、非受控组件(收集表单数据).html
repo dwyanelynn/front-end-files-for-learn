@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <div id="example"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/prop-types.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        class LoginForm extends React.Component {
+            constructor(props) {
+                super(props)
+                // 初始化状态
+                this.state = {
+                    pwd: ''
+                }
+                this.handleSubmit = this.handleSubmit.bind(this)
+                this.handleChange = this.handleChange.bind(this)
+            }
+            handleSubmit(event) {
+                /* 要做两件事情：不让表单提交；读取文本框数据 */
+                // 阻止事件默认行为
+                event.preventDefault()
+
+                const user = this.userInput.value
+                // const pw = this.pwInput.value    /* 收集密码框数据时和收集用户名框数据时同样写法 */
+                // alert(`您的用户名是${user}，您的密码是${pw}`)
+                const {pwd} = this.state    /* 收集密码框数据的另一种写法 */
+                alert(`您的用户名是${user}，您的密码是${pwd}`)
+                
+            }
+            handleChange(event) {
+                // 读取输入的值
+                const pwd = event.target.value
+                // 更新pwd的状态
+                this.setState({pwd})
+                /* 等同于this.setState({pwd: pwd})   前一个pwd是this.state里面的其中一个状态名，后一个pwd则是上一行的变量pwd*/
+            }
+            render() {
+                return (
+                    <form action="/test" onSubmit={this.handleSubmit}>
+                        用户名：<input type="text" ref={input => this.userInput = input}/>&nbsp;
+                        密码：<input type="password" value={this.state.pwd} onChange={this.handleChange}/>&nbsp;
+                        <input type="submit" value='登陆'/>
+                    </form>
+                )
+                /* 这里上面ref的input都是形参，所以两行都可以一样，因为不冲突 */
+                /* 输入文字的时候会触发一个事件叫onChange */
+                /* 原生的在input的onChange事件，是在失去焦点的时候触发
+                    react的onChange是输入发生改变的时候马上触发
+                 */
+            }
+        }
+        
+        ReactDOM.render(<LoginForm/>, document.getElementById('example'))
+    </script>
+</body>
+</html>

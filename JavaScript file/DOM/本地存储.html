@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .lin {
+            width: 200px;
+            height: 3000px;
+            background-color: #fce;
+        }
+        .top {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" class="val">
+    <button class="set">存储数据</button>
+    <button class="get">获取数据</button>
+    <button class="del">删除数据</button>
+    <button class="delAll">清空所有数据</button>
+    <div class="lin"></div>
+    <div class="top">回到顶部</div>
+    <script>
+        let inp = document.querySelector('.val')
+        let set = document.querySelector('.set')
+        let topp = document.querySelector('.top')
+        set.addEventListener('click', function() {
+            const val = inp.value
+            sessionStorage.setItem('jian', val)
+            let num = 5
+            this.innerHTML = '在' + num + '秒后才可以点击！'
+            this.disabled = true
+            let timer = setInterval(() => {
+                num -= 1
+                this.innerHTML = '在' + num + '秒后才可以点击！'
+                if (num < 0) {
+                    clearInterval(timer)
+                    this.innerHTML = '存储数据'
+                    this.disabled = false
+                }
+            }, 1000);
+        })
+        // top.addEventListener('click', () => {
+
+        // })
+</script>
+</body>
+</html>

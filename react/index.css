@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.top-wrapper {
+    height: 200px;
+    background-color: rgb(236,238,235);
+    position: relative;
+}
+.top-wrapper .text {
+    font-size: 50px;
+    color: rgb(39, 38, 38);
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 235px;
+}
+.container {
+    width: 800px;
+    margin: 20px auto;
+    background-color: blanchedalmond;
+    color: #000;
+}
+.container .left p {
+    font-size: 12px;
+    font-family: '宋体';
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.container .left {
+    width: 293px;
+    float: left;
+    
+}
+.container .left .user, .container .left textarea {
+    width: 280px;
+    border:1px solid rgb(163, 163, 163);
+    font-size: 12px;
+    color: rgb(43, 42, 42);
+    padding: 0 5px;
+    border-radius: 3px;
+}
+.container .left .user{
+    margin-bottom: 10px;
+    height: 25px;
+}
+.container .left textarea {
+    height: 100px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+    color: rgb(43, 42, 42);
+    display: block;
+    margin-bottom: 7px;
+}
+.container .left .submit {
+    width: 40px;
+    height: 25px;
+    float: right;
+    border:1px solid rgb(163, 163, 163);
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.container .right {
+    width: 400px;
+    float: right;
+}
+.container .right a {
+    width: 40px;
+    height: 21px;
+    float: right;
+    border:1px solid rgb(163, 163, 163);
+    border-radius: 5px;
+    background-color: #fff;
+    margin-top: 3px;
+    margin-right: 3px;
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+.container .right a:hover {
+    background-color: rgba(238, 235, 235, 0.849);
+}
+.container .right ul {
+    border-radius: 3px;
+    border:1px solid rgb(163, 163, 163);
+}
+.container .right li {
+    border-bottom:1px solid rgb(163, 163, 163);
+    /* border-radius: 3px; */
+}
+.container .right p {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+.container .right div {
+    font-size: 18px;
+    margin-left: 6px;
+}
+.container .right span {
+    font-size: 12px;
+    display: inline-block;
+    margin: 10px 30px;
+}

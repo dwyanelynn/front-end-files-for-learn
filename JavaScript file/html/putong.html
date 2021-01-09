@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <title>2</title>
+    <!-- <meta http-equiv="refresh" content="50;url=http://www.baidu.com"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+
+    * {
+        margin: 0;
+        padding: 0 ;
+    }
+    #hello{
+        color: dodgerblue;
+    }
+    #hello::selection{
+        background-color: rgb(137, 146, 167);
+    }
+    p{
+        font:  bold 40px '微软雅黑' ;
+    }
+    html {
+        background-color: rgb(228, 179, 179);
+    }
+    body {
+        background-color: #fff;
+        margin: 50px;
+    }
+
+    </style>
+</head>
+<body>
+    <p>换行<br/>测试</p>
+    <p id="hello">测试语句</p>
+    <hr>
+    <a href="mailto:abc@atguigu.com">联系我们</a>
+    <br>
+    <strong>警告：不要接近僵尸</strong>
+    <p>这是<em>一句不</em>一样的话</p>
+    <script>
+        let lin = {
+            name: 'lin',
+            age: 21,
+            set() {
+                console.log('我是set方法')
+            }
+        }
+        console.log(lin)
+        let name = Symbol('linshi')
+        let name1 = Symbol('linshi1')
+        lin[name]= 'lin'
+        lin[name1]= 'lin1'
+        console.log(lin[name])
+
+    </script>
+</body>
+</html>

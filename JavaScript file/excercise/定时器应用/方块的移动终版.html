@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器应用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(141, 171, 236);
+            margin-top: 30px;
+            position: absolute;
+        }
+        #line1 {
+            width: 1px;
+            height: 500px;
+            background-color: rgb(252, 5, 5);
+            left: 400px;
+            position: absolute;
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(151, 233, 126);
+            position: absolute;
+            top: 200px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let btn1 = document.getElementById("btn1");
+            let btn2 = document.getElementById("btn2");
+            let btn3 = document.getElementById("btn3");
+            let box1 = document.getElementById("box1");
+
+            // btn1.onclick = function() {
+            //     clearInterval(timer);/* 使再次点击不会增加定时器 */
+            //     timer = setInterval(function() {
+            //         var oldValue = parseInt(getStyle(box1, "left"));
+            //         /* 这里不用box1.offsetLeft是为了做示范，以便可以用于任何样式 */
+            //         /* 因为offsetLeft那些本来有的属性其实比较少，用这个可以更广泛 */
+            //         var newValue = oldValue + 20;
+            //         // 判断newValue是否大于400
+            //         if (newValue > 400) {
+            //             newValue = 400;
+            //         }
+            //         box1.style.left = newValue + 'px';
+            //         if (newValue == 400) {
+            //             clearInterval(timer);
+            //         }
+            //     }, 50)
+            //     // box1.style.left = '100px';
+            // }
+            btn1.onclick = function() {
+                boxMove(box1, 'left', 400, 15, function() {
+                    alert('nihao');
+                });
+            }
+            btn2.onclick = function() {
+                boxMove(box1, 'left', 0, 15);
+            }
+            btn3.onclick = function() {
+                boxMove(box2, 'left', 400, 5, function() {
+                    boxMove(box2, 'left', 0 , 5);
+                });
+            }
+            btn4.onclick = function() {
+                boxMove(box2, 'top', 400, 15);
+            }
+        }
+        // 尝试创建一个函数来表示box1的移动
+        function boxMove(obj, attr, target, speed, callback) {
+            /* obj: 要创建动画的对象 */
+            /* attr: 修改的样式种类，即向左还是向右 */
+            /* speed: 移动的速度（正数） */
+            /* target: 执行动画的目标位置 */
+            clearInterval(obj.timer);
+            // 判断速度的正负
+            var current = parseInt(getStyle(obj, attr));
+            if (current >= target) {
+                speed = -speed;
+            }
+            obj.timer = setInterval(function() {
+                var oldValue = parseInt(getStyle(obj, attr));
+                var newValue = oldValue + speed;
+                if (speed < 0 && newValue < target || speed > 0 && newValue > target) {
+                    newValue = target;
+                }
+                obj.style[attr]= newValue + 'px';/* 注意这里不能写为obj.style.name */
+                if (newValue == target) {
+                    clearInterval(obj.timer);
+                    callback();
+                }
+            }, 30)
+        }
+
+
+        function getStyle(obj, name) {
+           if (window.getComputedStyle) {     
+                return getComputedStyle(obj, null)[name];
+            } else {
+                return obj.currentStyle[name];
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btn1">点击按钮以后box1向右移动</button>
+    <button id="btn2">点击按钮以后box1向左移动</button>
+    <br>
+    <button id="btn3">点击按钮以后box2向右移动</button>
+    <button id="btn4">点击按钮以后box2向下移动</button>
+    <div id="box1"></div>
+    <div id="line1"></div>
+    <div id="box2"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+    <!-- 两种方式 -->
+    <script type="text/javascript">
+        const msg = 'I like you!';
+        const myID = 'Atguigu';
+        // 创建虚拟DOM
+        const vDOM1 = React.createElement('h1', {id:myID.toLowerCase()}, msg.toUpperCase())
+        // 渲染虚拟DOM 
+        ReactDOM.render(vDOM1, document.getElementById('test1')); 
+    </script>
+    <script type="text/babel">
+        // 创建虚拟DOM
+        const vDOM2 = <h3 id={myID.toUpperCase()}>{msg.toLowerCase()}</h3>
+        // 渲染虚拟DOM
+        ReactDOM.render(vDOM2, document.getElementById('test2')); 
+    </script>
+</body>
+</html>

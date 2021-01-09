@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <div id="example"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/prop-types.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        class App extends React.Component {
+            constructor(props) {
+                super(props)
+                // 初始化状态
+                this.state = {
+                    todos: ['吃饭', '睡觉', '玩手机']
+                }
+
+                this.addTodo = this.addTodo.bind(this)
+            }
+            addTodo(todo) {/* 若要子组件中改变父组件的state：要在父组件创建相应的响应函数，然后通过子组件标签传递给子组件，再在子组件调用该函数以传递更新后的值 */
+                // 调用该函数时，先取出原来存在的数据，即todos状态
+                const {todos} = this.state
+
+                todos.unshift(todo)/* todo是形参，在执行子组件Add的add()函数时候，已经把实参传过来，因为那里已经执行了这个addTodo函数 */
+
+                // 更新状态
+                this.setState({todos}) 
+                /* 等同于this.setState({todos: todos}) */
+                // this.setState(this.state.todos.unshift(todo))这代码执行不了
+            }
+            render() {
+                const {todos} = this.state 
+                /* 等同于const todos = this.state.todos */
+                return (
+                    <div>
+                        <h1>Simple TODO List</h1>
+                        <Add count={todos.length} addTodo={this.addTodo}/>
+                        <List todos={todos}/>
+                    </div>
+                )
+            }
+        }
+        class Add extends React.Component {
+            /* 该组件的作用：创建相关html标签，并点击按钮时，发送文本到父组件以更新State，最后删除文本框的文本 */
+            constructor(props) {
+                super(props) 
+                this.add = this.add.bind(this)
+            }
+            add() {
+                // 1. 读取输入的数据
+                const todo = this.todoInput.value.trim()    /* 去两边空格 */
+                // 2. 检查合法性
+                if (!todo) {
+                    return  /* 如果todo是空串，则不返回任何东西 */
+                }
+                // 3. 添加
+                this.props.addTodo(todo)/* 执行父组件的addTodo函数并传入参数todo。为什么能访问addTodo的函数？因为在父组件render()的组件标签<Add/>中，已经存在属性addTodo函数。所以能通过this.props访问 */
+                // 4. 在文本框中清除已添加的数据
+                this.todoInput.value = ''
+
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={input => this.todoInput = input}/>
+                        <button onClick={this.add}>add #{this.props.count}</button>
+                    </div>
+                )
+            }
+        }
+        class List extends React.Component {
+            /* 该组件的作用：读取父组件State的值，并根据这些值来生成相应的html标签 */
+            render() {
+                return (
+                    <ul>
+                        {this.props.todos.map((todo, index) => <li key={index}>{todo}</li>)}
+                    </ul>
+                )
+            }
+        }
+        // 指定组件标签属性值的类型和必要性
+        Add.propTypes = {
+            count: PropTypes.number.isRequired,/* 注意这里是否加逗号 */
+            addTodo: PropTypes.func.isRequired
+        }
+        List.propTypes = {
+            todos: PropTypes.array.isRequired
+        }
+
+        // 渲染虚拟DOM
+        ReactDOM.render(<App/>, document.getElementById('example'))/* 指渲染App类，就已经渲染了Add和List类了 */
+    
+    </script>
+</body>
+</html>

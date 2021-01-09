@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <div id="example"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/prop-types.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        class Life extends React.Component {
+            constructor(props) {
+                super(props)
+                // 初始化状态
+                this.destroyComponent = this.destroyComponent.bind(this)
+                this.state = {
+                    opacity: 1
+                }
+            }
+            componentDidMount() {/* 这个函数是生命周期的一个勾子。现在重写它，表明把DOM挂载到真实DOM后你想做点什么 */
+                                /* 更新state其实不会开启定时器的，因为更新state这个流程根本没有componentDidMount */
+                // 组件挂载完后，启动循环定时器
+                this.intervalId = setInterval(function(){/* 这里是把定时器的标识存储在组件对象Life的属性里 */
+                    let {opacity} = this.state
+                    opacity -= 0.01
+                    if (opacity <= 0) { /* 这里小于等于0是因为，有可能减0.01后不一定等于0而等于负值 */
+                        opacity = 1
+                    }
+                    this.setState({opacity})
+                }.bind(this), 20)
+            }
+            destroyComponent() {
+                ReactDOM.unmountComponentAtNode(document.getElementById('example'))
+            }
+            componentWillUnmount() {
+                clearInterval(this.intervalId)
+            }
+            render() {
+                const {opacity} = this.state
+                return (
+                    <div>
+                        <h2 style={{opacity}}>{this.props.msg}</h2>
+                        <button onClick={this.destroyComponent}>不活了</button>
+                    </div>
+                )/* 注意h2里面的style有两个花括号,外围的花括号代表编写js代码，里面那个表示是对象，因为设置style时要用对象{}，因为有很多样式 */
+            }
+        }
+        ReactDOM.render(<Life msg="React学不会，怎么办？"/>, document.getElementById('example'))
+    </script>
+</body>
+</html>

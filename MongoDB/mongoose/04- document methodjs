@@ -1,0 +1,40 @@
+const mongoose = require('mongoose')
+const { disconnect } = require('process')
+mongoose.connect('mongodb://localhost/mongoose_test', {useNewUrlParser: true, useUnifiedTopology: true})
+
+const Schema = mongoose.Schema  
+const stuSchema = new Schema({
+    name: String,
+    age: Number,
+    gender: {
+        type: String,
+        default: 'female'
+    },
+    address: String
+})
+
+const StuModel = mongoose.model('student', stuSchema)
+
+// 创建一个Document（但此时还没有插入数据库）
+// let stu = new StuModel({
+//     name: '奔波霸',
+//     age: 48,
+//     gender: 'male',
+//     address: '碧波潭'
+// })
+// stu.save(function(err){
+//     if(!err) {
+//         console.log('保存成功')
+//     }
+// })
+
+// stu.updateOne({$set:{age: 50}})
+
+StuModel.findOne({},function(err, doc) {
+    if(!err) {
+        console.log(doc.toJSON())
+    }
+})
+
+mongoose.connection.once('open', function(){console.log('连接成功')})
+mongoose.connection.once('close', function(){console.log('连接断开')})

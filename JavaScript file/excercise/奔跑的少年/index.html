@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div:nth-of-type(1) {
+            width: 256px;
+            height: 256px;
+            background: url(./bg2.png);
+            margin: 0 auto;
+            animation: child 0.6s steps(6) 3;
+        }
+        @keyframes child {
+            from{
+                background-position: 0 0;
+            }
+            to {
+                background-position: -1536px 0;/* 这里则是整张图片的宽度的负值 */
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

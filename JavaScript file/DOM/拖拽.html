@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin:0 ;
+            padding: 0;
+        }
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(241, 175, 175);
+            position: absolute;
+            left: -100px;
+            top: 100px;
+        }
+        .linshi {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            background-color: #bfa;
+            left: 200px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let box1 = document.getElementsByClassName('box1')[0];
+            function drag (obj) {
+                obj.onmousedown = function(event) {
+                    obj.setCapture && obj.setCapture();
+        
+                    event = event || window.event;
+                    let ol = event.clientX - obj.offsetLeft;
+                    let ot = event.clientY - obj.offsetTop;
+                
+                    document.onmousemove = function (event) {
+                        event = event || window.event;
+                        let a = event.clientX - ol;
+                        let b = event.clientY - ot;
+                        obj.style.left = `${a}px`;
+                        obj.style.top = `${b}px`;
+                    }
+                    document.onmouseup = function () {
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                        obj.releaseCapture && obj.releaseCapture();
+                    }
+                return false;
+                }
+            }   
+        drag(box1);
+        }
+    </script>
+</head>
+<body>
+    <div class="linshi">
+        <div class="box1">
+        </div>
+    </div>
+    <br>
+    <div class="linsh"></div>
+
+</body>
+</html>

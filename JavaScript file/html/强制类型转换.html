@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var a = 123;
+        document.write(a);
+        document.write("\n");
+        document.write("a的类型为"+typeof(a)+"<br/>");
+
+        var b = a.toString();
+        document.write(typeof a.toString());//输出string
+        document.write(typeof b);  //输出string
+        document.write(typeof a);  //还是输出number
+        a = a.toString();   //转换到a本身
+        document.write(typeof(a));//输出string
+
+        var c = 123;
+        document.write("\n");
+        document.write(typeof String(c));  //输出string，但现在还没把c转换
+        document.write(typeof c);//输出number
+        c = String();
+        document.write(typeof c);//输出string
+
+        var d = "11";
+        d = parseInt(d,2);
+        document.write(d);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

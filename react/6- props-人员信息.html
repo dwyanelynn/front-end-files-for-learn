@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <div id="example"></div>
+    <div id="example2"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/prop-types.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    // 定义组件
+    /* 由于该组件没有状态，所以可用工厂函数模式 */
+    function Person(props) {
+        return (
+            <ul>
+                <li>姓名：{props.name}</li>
+                <li>年龄：{props.age}</li>
+                <li>性别：{props.sex}</li>
+            </ul>
+        )
+    }
+    /* 也可以用ES6类定义 */
+    // class Person extends React.Component {
+    //     render() {
+    //         return (
+    //             <ul>
+    //                 <li>姓名：{this.props.name}</li>
+    //                 <li>年龄：{this.props.age}</li>
+    //                 <li>性别：{this.props.sex}</li>
+    //             </ul>
+    //         )
+    //     }
+    // }
+    /* this指向Person */
+    /* 好像用ES6类定义组件中，里面要用this？ */
+
+    // 指定属性默认值
+    Person.defaultProps = {
+        sex: '男',
+        age: 18
+    }
+    // 指定属性值的类型和必要性
+    Person.propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number
+    }
+    const p1 = {
+        name: 'Tom',
+        age: 18,
+        sex: '女'
+    }
+    const p2 = {
+        name: 'Jack',
+        age: 22,
+        sex: '男'
+    }
+
+    // 渲染组件标签
+    ReactDOM.render(<Person name={p1.name} age={p1.age} sex={p1.sex}/>, document.getElementById('example'))
+    ReactDOM.render(<Person {...p2}/>, document.getElementById('example2'))
+    </script>
+</body>
+</html>

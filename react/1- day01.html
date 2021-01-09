@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- 这里注意引用顺序 -->
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">/* 告诉babel.js解析里面的jsx的代码 */
+        // 创建虚拟DOM元素对象
+        const vDom = <h1>Hello, React!</h1>/* 不是字符串，不要加引号 */
+        // 将虚拟DOM渲染到页奋真实DOM容器中
+        ReactDOM.render(vDom, document.getElementById('test'));
+    </script>
+</body>
+</html>

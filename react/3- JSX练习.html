@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>前端JS框架列表</h1>
+    <div id="example"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const body = document.body
+    const arrLessons = ['jquery','zeptoo','angular','react全家桶','vue全家桶']
+    // 如何将一个数据的数组转换为一个标签的数组
+    // map 对数组中的每个元素运行给定函数，返回每次函数调用的结果组成的数组
+        /* 其实forEach和这个map差不多，但是forEach没有返回值 */
+    const vDOM = (
+        <ul>
+            {/* 注意是花括号，表示要编写js代码 */
+                arrLessons.map((value, index) => <li key={index}>{value}</li>)
+                /* 每个li需要指定一个名为key属性名，不然控制台会有警告 */
+            }
+        </ul>
+    )  
+    ReactDOM.render(vDOM, document.getElementById('example'))
+    </script>
+</body>
+</html>

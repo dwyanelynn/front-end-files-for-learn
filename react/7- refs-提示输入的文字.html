@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <div id="example"></div>
+    <div id="example2"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/prop-types.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    // 定义组件
+    class Tips extends React.Component{
+        constructor(props) {
+            super(props)
+            this.showInput = this.showInput.bind(this)
+            this.handleBlur = this.handleBlur.bind(this)
+        }
+        showInput(event) {/* 一旦有自定义的函数，就要重置该函数的this（在constructor设置） */
+            const dd = this.refs.content/* refs是本来就有的，是一个对象，存储各标签ref的属性值。 */
+                                    /* 因为该组件对象中每个标签都可以设置ref属性，所以就加s */
+            alert(`第一个文本框的值${dd.value}`)
+            alert(`第二个文本框的值${this.ct.value}`)
+        }
+        handleBlur(event) {
+            alert(event.target.value)/* 这里用ref那种方法也可以，但这种在此时更高效 */
+            /* target应该是指执行该函数时所对应的标签 */
+        }
+        render() {
+            return (
+                <div>
+                    <input type="text" ref='content'/>&nbsp;
+                    <input type="text" ref={ab => this.ct = ab}/>&nbsp;
+                    <button onClick={this.showInput}>提示输入</button>&nbsp;
+                    <input type="text" placeholder='失去焦点提示内容' onBlur={this.handleBlur}/>
+                </div>
+            )/* 注意这里的input标签虽然是自结束标签，但在react也需要加斜杠/ */
+            /* 监听 onClick应该是当点击的时候执行{}里面的函数 */
+            /* return里面的第二行Input的第一个ct，可以为其套上括号也可以不套  */
+        }
+    }
+    // 渲染组件标签
+    ReactDOM.render(<Tips/>, document.getElementById('example'))
+    </script>
+</body>
+</html>
+
+
+
+
+<input type="text"/>

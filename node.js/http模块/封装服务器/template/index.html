@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影页</title>
+    <link rel="stylesheet" href="/static2/style.css"><!-- 注意这里不是static，因为静态资源路径已经改了 -->
+</head>
+<body>
+    <h1>电影标题：{{name}}</h1>
+    <h2>电影简介：{{desc}}</h2>
+    <p>电影作者：{{author}}</p>
+    <ul>
+        {%for {list} %}
+        <li>{{item}}</li>
+        {%endfor%}
+    </ul>
+</body>
+</html>

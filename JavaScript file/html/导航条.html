@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航条</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .header {
+        background-color: rgb(105, 153, 255);
+        width: 600px;
+        height: 25px;
+        margin: 20px auto;
+        overflow: hidden;
+        list-style: none;
+    }
+    .headertitle{
+        float: left;
+        width: 25%;
+    }
+    .headertitle a{ 
+        display: block;
+        width: 100%;
+        height: 25px;
+        text-align: center;
+        font-weight: bold;
+        color:white;
+        text-decoration: none;
+        font-size: 15px;
+        line-height: 25px; /* 目的是使文本垂直居中，下面用padding也可以 */
+        /* padding: 2.5px 0px; */ /* 注意这里是2.5px因为你内边距和字体高度不能超过height */
+/*         注意是用内边距调整文字的垂直居中 */
+    }
+    .headertitle a:hover{
+        background-color: red;
+    }
+    </style>
+</head>
+<body>
+    <ul class="header">
+        <li class="headertitle"><a href="https://www.baidu.com" target="blank">首页</a></li>
+        <li class="headertitle"><a href="https://www.eastmoney.com" target="blank">新闻</a></li>
+        <li class="headertitle"><a href="https://www.eastmoney.com" target="blank">联系</a></li>
+        <li class="headertitle"><a href="https://www.eastmoney.com" target="blank">关于</a></li>
+    </ul>
+    
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!-- 前端页面 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #90b;
+        }
+    </style>
+</head>
+<body>
+    <button>点击发送请求</button>
+    <br>
+    <br>
+    <div>以下是服务端返回的响应体内容结果：</div>
+    <!-- 留意返回时是不刷新页面 -->
+    <div id="result"></div>
+    <script>
+        // 获取button元素
+        let btn = document.getElementsByTagName('button')[0]
+        const result = document.getElementById('result')
+        // 绑定事件
+        btn.onclick = function() {
+            // 1.创建对象
+            const xhr = new XMLHttpRequest()
+            // 2.初始化：设置请求方法和url
+            xhr.open('GET', 'https://restapi.amap.com/v3/weather/weatherInfo?key=d80fee8b54b8c759f8633160140b9a16&city=440100')
+                /* 注意http://127.0.0.1:8000 这个内容现在还不能省略 */
+            // 3.发送
+            xhr.send()
+            // 4.事件绑定  处理服务端返回的结果
+            /* 
+                on: 当...的时候（如onclick)
+                readystate: 是xhr对象的属性，表示状态（有5个值：0,1,2,3,4）
+                        0：未初始化 1：open方法调用完毕 2：send方法调用完毕
+                         3：服务端返回了部分结果 4：服务端返回了全部结果
+                change: 改变
+                所以onreadystatechange的意思是：当xhr对象readystate这个属性的值改变时
+                由于有5个状态，所以该回调函数会触发四次（0是初始值）。
+            */
+            xhr.onreadystatechange = function() {
+                // 在这里处理服务端返回的结果
+                // 判断（服务端是否返回了所有结果）
+                if (xhr.readyState === 4) {
+                    // 判断响应的状态码 200 404 403 401 500
+                    /* 当响应状态码为200时，就正确地拿到了服务端返回的结果 */
+                    /* 其实响应状态码中，2开头的都表示成功 */
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // 处理结果（结果包括：行 头 空行 体） （空行我们就不获取了）
+                        // 1.响应行
+                        
+                            // console.log(xhr.status)/* 状态码 */
+                            // console.log(xhr.statusText)/* 状态字符串 */
+                            // console.log(xhr.getAllResponseHeaders())/* 所有响应头 */
+                            // console.log(xhr.response)/* 响应体 */
+
+                        // 设置result的文本
+                        console.log(JSON.parse(xhr.response))
+                    }else {
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

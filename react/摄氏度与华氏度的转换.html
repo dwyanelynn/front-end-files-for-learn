@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="example"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/prop-types.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        class SheshiduInput extends React.Component {
+            handleChange = (e) => {
+                this.props.getSubChange(e.target.value, 's')
+            }
+            render() {
+                return (
+                    <div>
+                        <p>请输入摄氏度：</p>
+                        <input type="text" value={this.props.tem} onChange={this.handleChange}/>
+                    </div>
+                )
+            }
+        }
+        class HuashiduInput extends React.Component {
+            handleChange = (e) => {
+                this.props.getSubChange(e.target.value, 'h')
+            }
+            render() {
+                return (
+                    <div>
+                        <p>请输入华氏度：</p>
+                        <input type="text" value={this.props.tem} onChange={this.handleChange}/>
+                    </div>
+                )
+            }
+        }
+        class App extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    tem: '',
+                    scale: ''
+                }
+            }
+            getSubChange = (tem,scale) => {
+                this.setState({tem, scale})
+            }
+            render() {
+                const {tem, scale} = this.state
+                return (
+                    <div>
+                        <SheshiduInput getSubChange={this.getSubChange} tem={scale === 'h'? tryConvert(tem,toCelsius): tem}/>
+                        <HuashiduInput getSubChange={this.getSubChange} tem={scale === 's'? tryConvert(tem,toFahrenheit): tem}/>
+                    </div>
+                )
+            }
+        }
+        function toCelsius(fahrenheit) {
+            return (fahrenheit - 32) * 5 / 9;
+        }
+
+        function toFahrenheit(celsius) {
+            return (celsius * 9 / 5) + 32;
+        }
+        function tryConvert(temperature, convert) {
+            const input = parseFloat(temperature);
+            if (Number.isNaN(input)) {
+                return '';
+            }
+            const output = convert(input);
+            const rounded = Math.round(output * 1000) / 1000;
+            return rounded.toString();
+        }
+
+        ReactDOM.render(<App />, document.getElementById('example'))
+
+    </script>
+</body>
+
+</html>

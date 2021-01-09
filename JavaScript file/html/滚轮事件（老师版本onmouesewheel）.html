@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #lin {
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+        body {
+            height: 3000px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let lin = document.getElementById('lin');
+            lin.onmousewheel = function(event) {
+                event = event || window.event;
+                if (event.wheelDelta > 0 || event.detail < 0) {
+                    lin.style.height = lin.clientHeight - 20+"px";
+                }else {
+                    lin.style.height = lin.clientHeight + 20+"px";
+                }
+                event.preventDefault() && event.preventDefault();
+                return false;
+            }
+
+            bind(lin, "DOMMouseScroll", lin.onmousewhell);
+            function bind(obj, eventStr, callback) {
+            if (obj.addEventListener) {
+                obj.addEventListener(eventStr, callback, false);
+            }else {
+                obj.attachEvent("on"+eventStr, function() {
+                    callback.call(obj);
+                });
+            }
+        }   
+               
+        }
+    </script>
+</head>
+<body>
+    <div id="lin"></div>
+</body>
+</html>

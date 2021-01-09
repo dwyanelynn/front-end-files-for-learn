@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/JavaScript"></script>
+    <style type="text/css"></style>
+</head>
+<body>
+    <form action="#">
+        <label for="un">用户名</label>
+        <input id="un"type="text" name="username"><br><br>
+        <label for="pw">密码</label>
+        <input id="pw" type="password" name="password"><br><br>
+        <label for="gd">性别</label>
+            <input id="male" type="radio" name="gender" value="male" checked><label for="male">男</label>
+             <input id="female" type="radio" name="gender" value="female"><label for="female">女</label><br><br>
+        爱好 <input type="checkbox" name="hobby" value="basketball" checked>篮球
+            <input type="checkbox" name="hobby" value="football">足球
+             <input type="checkbox" name="hobby" value="tennis">网球
+            <input type="checkbox" name="hobby" value="swimming" checked>游泳<br><br>
+        喜欢的明星<select name="star" >
+            <optgroup label="女明星">
+                <option value="dlrb">迪丽热巴</option>
+                <option value="tsy">谭松韵</option>
+                <option value="syz">孙燕姿</option>
+            </optgroup>
+            <optgroup label="男明星">
+                <option value="zjl">周杰伦</option>
+                <option value="fbb" selected>华晨宇</option>
+                <option value="yyp">岳云鹏</option>
+            </optgroup>
+        </select><br><br>
+        自我介绍 <textarea name="info"></textarea><br><br>
+
+        <input type="submit" value="注册">
+        <input type="reset" value="重置">
+        <input type="button" value="单纯的按钮"><br><br>
+        <button type="submit">注册</button>
+        <button type="reset">重置</button>
+        <button type="button">单纯的按钮</button>
+    </form>
+    
+</body>
+</html>

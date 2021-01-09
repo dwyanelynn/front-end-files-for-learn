@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            perspective: 800px;
+        }
+        .wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            position: relative;
+            background-color: rgb(230, 173, 173);
+            transform-style: preserve-3d;
+            animation: run 10s linear infinite;
+            
+        }
+        .wrapper > div {
+            position: absolute;
+        }
+        img {
+            vertical-align: middle;
+            width: 100%;
+            opacity: 0.8;
+        }
+        .img1 {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        .img2 {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+        .img3 {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+        .img4 {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+        .img5 {
+            transform: rotateY(0deg) translateZ(50px) /* rotateX(180deg) */;
+        }
+        .img6 {
+            transform: rotateY(180deg) translateZ(50px);
+        }
+
+        @keyframes run {
+            from {
+                transform: rotateX(0deg) rotateX(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="img1"><img src="../../img/HCY.JPG"></div>
+        <div class="img2"><img src="../../img/HCY.JPG"></div>
+        <div class="img3"><img src="../../img/HCY.JPG"></div>
+        <div class="img4"><img src="../../img/HCY.JPG"></div>
+        <div class="img5"><img src="../../img/HCY.JPG"></div>
+        <div class="img6"><img src="../../img/HCY.JPG"></div>
+    </div>
+    
+</body>
+</html>

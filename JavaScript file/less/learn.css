@@ -1,0 +1,26 @@
+body {
+  background-color: #f1f1f1;
+}
+body .box2 {
+  width: 50px;
+  height: 50px;
+  background-color: #ddee7d;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+.box1 {
+  width: 100px;
+  height: 100px;
+  background-color: #aae0ff;
+}
+.box1 .box2 {
+  width: 50px;
+  height: 50px;
+  background-color: #f19999;
+}
+.box1:hover {
+  background-color: #fff;
+}
+/*# sourceMappingURL=./learn.css.map */

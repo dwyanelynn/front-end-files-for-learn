@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            /* 给Html设置视距 */
+            perspective: 800px;
+        }
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(228, 124, 124);
+            margin: 20px;
+            transition: all 0.3s;
+            float: left;
+        }
+        .box1:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1px 6px rgb(90, 80, 80);
+        }
+        .box2 {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(182, 238, 144);
+            margin: 20px;
+            float: left;
+            transition: all 0.5s;
+        }
+        .box2:hover{
+            /* transform: translateZ(100px); */
+            /* transform: rotateZ(-45deg); */
+            /* transform: rotateY(-45deg); */
+            
+            /* 这里有顺序问题 */
+            /* transform: rotateX(45deg) rotateY(45deg) ;
+            transform: rotateY(45deg) rotateX(45deg) ; */
+            
+            transform: rotateY(180deg) translateZ(200px) ;
+            transform: translateZ(200px) rotateY(180deg) ;
+        }
+        .box3 {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(124, 181, 228);
+            box-shadow: 0 1px 6px rgb(90, 80, 80);
+            margin: 20px;
+            transition: all 0.5s;
+            float: left;
+            
+        }
+        .box3:hover {
+            transform:scale(1.1);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+    </div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <title>2</title>
+    <!-- <meta http-equiv="refresh" content="50;url=http://www.baidu.com"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+    #box1 {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(204, 146, 146);
+        overflow: scroll;
+    }
+    #box2 {
+        width: 100px;
+        height: 300px;
+        padding: 10px;
+        border: solid 1px black;
+        background-color: rgb(238, 232, 232);
+    }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+    <button id="btn1">我是一个按钮</button>
+    <script>
+        let box1 = document.getElementById("box1");
+        let box2 = document.getElementById("box2");
+        let btn1 = document.getElementById("btn1");
+        let body = document.getElementsByTagName('body')[0];
+        let dd = box2.offsetParent;
+        btn1.onclick = function() {
+            alert(`box1为box2的父元素，box1宽高200px； box2宽100px,高300px，内边距10，边框1 
+            2offsetHeight=${box2.offsetHeight};
+            2clientHeight=${box2.clientHeight};
+            2scrollHeight=${box2.scrollHeight};
+            1offsetHeight=${box1.offsetHeight};
+            1clientHeight=${box1.clientHeight};
+            1scrollHeight=${box1.scrollHeight};
+            1scrollTop=${box1.scrollTop};
+            1减法=${box1.scrollHeight - box1.scrollTop}`);
+        }
+            
+    </script>
+</body>
+</html>

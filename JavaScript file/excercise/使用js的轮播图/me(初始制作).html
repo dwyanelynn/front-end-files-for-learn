@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #outer {
+            margin: 0 auto;
+            background-color: rgb(245, 212, 212);
+            width: 500px;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+        #order {
+            font-size: 15px;
+            line-height: 15px;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let prev = document.getElementById('prev')
+            let next = document.getElementById('next')
+            let index = 0;
+            let arrimg = ['./img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg', './img/5.jpg'];
+            let order = document.getElementById('order');
+            order.innerHTML = `共有${arrimg.length}张图片，现在是第1张`;
+            let img = document.getElementsByTagName('img')[0]
+            prev.onclick = function() {
+                if (index === 0) {
+                    img.src =  './img/5.jpg';
+                    index = arrimg.length-1;
+                }
+                else {
+                    img.src = arrimg[index - 1];
+                    index--;
+                }
+                order.innerHTML = `共有${arrimg.length}张图片，现在是第${index+1}张`;
+            }
+            next.onclick = function() {
+                if (index === arrimg.length-1) {
+                    img.src =  './img/1.jpg';
+                    index = 0;
+                }
+                else {
+                    img.src = arrimg[index + 1];
+                    ++index;
+                }
+                order.innerHTML = `共有${arrimg.length}张图片，现在是第${index+1}张`;
+            }
+            let timeon = document.getElementById('timeon');
+            let timeoff = document.getElementById('timeoff');
+            let timer;/* 声明一个计时器的变量 */
+            let timer2;/* 声明一个计时器的变量 */
+            var num = 1;
+            timeon.onclick = function() {
+                clearInterval(timer);
+                clearInterval(timer2);
+                timer = setInterval(function() {
+                    index++;
+                    // if (index >= arrimg.length) {
+                    //     index = 0;
+                    // }
+                    // index = index % arrimg.length;
+                    index %= arrimg.length;
+                    img.src = arrimg[index];
+                }, 2000)
+                timer2 = setInterval(function() {
+                    count.innerHTML = num++;
+                    num %= 10;
+                }, 1000);
+            }
+            timeoff.onclick = function() {
+                clearInterval(timer);
+                clearInterval(timer2);
+            }
+            
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <p id="order"></p>
+        <img src="./img/1.jpg" alt="冰棍">
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+        <button id="timeon">开始自动切换</button>
+        <button id="timeoff">停止自动切换</button>
+    </div>
+    <h1 id="count"></h1>
+    
+</body>
+</html>

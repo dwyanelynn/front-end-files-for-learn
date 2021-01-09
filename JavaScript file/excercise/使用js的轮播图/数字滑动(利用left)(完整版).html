@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        img {
+            vertical-align: middle;
+        }
+        #outer {
+            margin: 0 auto;
+            background-color: rgb(245, 212, 212);
+            width: 500px;
+            height: 333px;
+            overflow: hidden;
+            margin-top: 30px;
+            position: relative;
+        }
+        #imgList {
+            position: absolute;
+            list-style: none;
+            left: 0;
+        }
+        #imgList li {
+            float: left;
+            width: 500px;
+            height: 333px;
+            color: blanchedalmond;
+            text-align: center;
+            line-height: 333px;
+            font-size: 150px;
+            font-family: 'Source Sans Pro';
+        }
+        #imgList li:nth-of-type(2),#imgList li:nth-of-type(7) {
+            background-color: rgb(85, 170, 5);
+        }
+        #imgList li:nth-of-type(3) {
+            background-color: rgb(5, 132, 170);
+        }
+        #imgList li:nth-of-type(4) {
+            background-color: rgb(170, 15, 144);
+        }
+        #imgList li:nth-of-type(5) {
+            background-color: rgb(168, 11, 6);
+        }
+        #imgList li:nth-of-type(6), #imgList li:nth-of-type(1) {
+            background-color: rgb(170, 132, 5);
+        }
+        .prev-next a {
+            position: absolute;
+            margin: 132px 0;
+            width: 41px;
+            height: 69px;
+            background-color: rgba(228, 204, 204, 0.534);
+        }
+        .prev-next #prev{
+            background: url(./img/icon-slides.png) no-repeat;
+            background-position: -84px;
+        }
+        .prev-next #prev:hover {
+            background: url(./img/icon-slides.png) no-repeat;
+            cursor: pointer;
+        }
+        .prev-next #next {
+            background: url(./img/icon-slides.png) no-repeat;
+            background-position: -126px;
+            right: 0px;
+        }
+        .prev-next #next:hover {
+            background: url(./img/icon-slides.png) no-repeat;
+            background-position: -42px;
+            cursor: pointer;
+        }
+        #navDiv {
+            position: absolute;
+            /* left: 50%;
+            transform: translateX(-50%); */
+            /* 这里还可以使用left的百分比来居中，但实际项目中还是根据浏览器兼容而选择，因为transform不确定IE是否兼容 */
+            /* 如果是用left的数值的话，可以用js计算出相应的数值，这样每次多加一个按钮也能自动居中 */
+            bottom: 20px;
+        }
+        #navDiv a {
+            float: left;
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+            box-sizing: border-box;
+            border-radius: 50%;/* 这个不支持IE8 */
+            border: 1.5px solid rgb(119, 116, 116);
+            background-color: rgb(192, 190, 190);/* rgba好像也不支持IE8 */
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+        #navDiv a:hover {
+            opacity: 0.9;
+            /* filter: alpha(opacity=0); */
+            background-color: #fff;
+        }
+        .linshi {
+            font: lighter 20px 'Source Sans Pro';
+            color: #304455;
+
+        }
+
+    </style>
+    <script type="text/javascript" src="../js全部工具函数合并.js"></script>
+    <script>
+        window.onload = function() {
+            // 定义包裹图片的容器宽度（图片宽度加额外的marin或padding）
+            var picWrapWidth = 500;
+            var initLeft = -picWrapWidth + 'px';
+
+            // 使存放图片的imgList能够根据图片的数量而增加宽度
+            var imgList = document.getElementById("imgList");
+            var liArr = document.getElementsByTagName('li');
+            var outer = document.getElementById('outer');
+            imgList.style.width = picWrapWidth * liArr.length + "px";
+
+            // 设置导航按钮居中↓
+            var navDiv = document.getElementById('navDiv');
+            var outer = document.getElementById('outer');
+            navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + 'px';
+
+            // 鼠标悬浮在imgList时暂停自动切换
+            outer.onmouseover = function() {
+                clearInterval(timer);
+            }
+            outer.onmouseout = function() {
+                autochange();
+            }
+
+            // 设置上一张与下一张的切换
+            var prev = document.getElementById('prev');
+            var next = document.getElementById('next');
+            prev.onclick = function() {
+                index--;
+                if (index <= 0) {
+                    imgList.style.transitionDuration = '0ms';
+                    imgList.style.left = -picWrapWidth*(liArr.length-1) + 'px';
+                    index = 5;
+                    imgList.offsetLeft;
+                }
+                imgList.style.transitionDuration = '1s';
+                imgList.style.left= -picWrapWidth*index + 'px';
+                setA();                
+            }
+            next.onclick = function() {
+                index++;
+                if (index >= liArr.length) {
+                    imgList.style.transitionDuration = '0ms';
+                    imgList.style.left = initLeft;/* 当到达所谓的最后一张时，瞬间切换到第一张 */
+                    index = 2;
+                    imgList.offsetLeft;/* 避免if作用域下面的样式覆盖作用域内的样式（渲染队列的渲染规则问题导致） */
+                }
+                imgList.style.transitionDuration = '1s';
+                imgList.style.left= -picWrapWidth*index + 'px';
+                setA();
+            }
+
+
+            // 设置导航按钮默认显示的效果
+            var index = 1;/* 默认显示着的图片的索引 */
+            imgList.style.left = index * -picWrapWidth + 'px';
+            var navArr = navDiv.getElementsByTagName('a');
+            navArr[index-1].style.backgroundColor = '#fff';
+            navArr[index-1].style.opacity = '0.9';
+
+            // 为所有的超链接都绑定单击响应函数
+            for (var i=0; i<navArr.length; ++i) {
+                /* 因为单击响应函数里的allA已经查看不了它的索引，所以我们在这里添加一个属性来保存索引 */
+                navArr[i].num = i;
+                navArr[i].onclick = function() {
+                    /* 将num属性的值，赋给全局变量的index，来修正我当时显示图片的索引 */                    
+                    index = this.num + 1;
+                    imgList.style.transitionDuration = '1s';
+                    imgList.style.left = -picWrapWidth*(index) + 'px';
+                    setA();
+                }
+            }
+
+            // 创建一个方法用来设置选中的a
+            function setA() {
+                // 下面循环使点击完后恢复为原始样式（即消除之前在.style设置的内联样式）
+                for (var i=0; i<navArr.length; ++i) {
+                    navArr[i].style.backgroundColor = '';
+                    navArr[i].style.opacity = '';
+                }
+                
+                // 当到达“克隆的最后一张”时，先把索引设置为1使第一个nav按钮亮，
+                // 亮完后再把索引调回liArr.length-1的值以使autochange函数的if条件生成
+                if (index >= liArr.length- 1) {
+                    index = 1;
+                    navArr[index-1].style.backgroundColor = 'white';
+                    navArr[index-1].style.opacity = '0.9';
+                    index = liArr.length - 1;/* 此行是关键 */
+                }else {
+                    navArr[index-1].style.backgroundColor = 'white';
+                    navArr[index-1].style.opacity = '0.9';
+                }
+            }
+
+            // 创建一个自动切换的方法
+            var timer;
+            function autochange() {
+                timer = setInterval(function() {
+                    index++;
+
+                    /* 滑到最后一张克隆图时，此时index为length-1，因为处于定时器，
+                        会再一次执行该程序，然后经过再一次上一行的自增后，index=length，
+                        此时要把整个imgList的0ms地left设为0 */
+                        /* 所以是要在这里设置if条件，而不是setA里面 */
+                    if (index >= liArr.length) {
+                        imgList.style.transitionDuration = '0ms';
+                        imgList.style.left = initLeft;/* 当到达所谓的最后一张时，瞬间切换到第一张 */
+                        index = 2;
+                        imgList.offsetLeft;/* 避免if作用域下面的样式覆盖作用域内的样式（渲染队列的渲染规则问题导致） */
+                    }
+                    imgList.style.transitionDuration = '1s';
+                    imgList.style.left= -picWrapWidth*index + 'px';
+                    setA();
+                }, 3000)
+            }
+            autochange();
+        }
+    </script>
+</head>
+<body>
+    <!-- 创建一个外部的div，来作为大的容器 -->
+    <div id="outer">
+        <!-- 创建一个ul，用于放置图片 -->
+        <ul id="imgList">
+            <li>5</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>1</li>
+        </ul>
+        <!-- 创建上下页按钮 -->
+        <div class="prev-next">
+            <a id="prev"></a>
+            <a id="next"></a>
+        </div>
+        <!-- 创建轮播图的导航条 -->    
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="linshi">现在还没完成：当正在滑动时，点击任何开始滑动的按钮都无效</div>
+</body>
+</html>
